@@ -30,28 +30,16 @@ public class UserDataLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadUserJobTestData() {
-        createTempUsers();
-        createTempCompanies();
-        createTempUserJob();
+        createTempData();
     }
 
-    private void createTempUserJob() {
+
+    private void createTempData() {
         userJobRepository.deleteAll();
-        var userJob1 = UserJobInfo.of(1, 1, "описание", true);
-        var userJob2 = UserJobInfo.of(1, 1, "описание", true);
-        userJobRepository.saveAll(List.of(userJob1, userJob2));
-    }
-
-    private void createTempCompanies() {
-        companyRepository.deleteAll();
-        var company1 = Company.of("Рога", "Продажа мяса", true);
-        var company2 = Company.of("Копыта", "Продажа молока", true);
-        companyRepository.saveAll(List.of(company1, company2));
-    }
-
-    private void createTempUsers() {
         userRepository.deleteAll();
-        var user1 = Users.of(
+        companyRepository.deleteAll();
+
+        Users testUser1 = userRepository.save(Users.of(
                 "Денисов",
                 "Владимирович",
                 "Максим",
@@ -60,9 +48,9 @@ public class UserDataLoader {
                 33,
                 "программист",
                 false
-        );
+        ));
 
-        var user2 = Users.of(
+        Users testUser2 = userRepository.save(Users.of(
                 "Иванов",
                 "Иванович",
                 "Иван",
@@ -71,9 +59,35 @@ public class UserDataLoader {
                 30,
                 "программист",
                 false
-        );
+        ));
 
-        userRepository.saveAll(List.of(user1, user2));
+        Company testCompany1 =
+                companyRepository.save(
+                        Company.of(
+                                "Рога",
+                                "Продажа мяса",
+                                true
+                        ));
+        Company testCompany2 =
+                companyRepository.save(
+                        Company.of(
+                                "Копыта",
+                                "Продажа молока",
+                                true
+                        ));
+
+
+        var userJob1 = userJobRepository.save(UserJobInfo.of(
+                testCompany1.id(),
+                testUser1.id(),
+                "Первый пользователь с первой работой",
+                true
+        ));
+        var userJob2 = userJobRepository.save(UserJobInfo.of(
+                testCompany2.id(),
+                testUser2.id(),
+                "Второй пользователь со второй работой",
+                true
+        ));
     }
-
 }
