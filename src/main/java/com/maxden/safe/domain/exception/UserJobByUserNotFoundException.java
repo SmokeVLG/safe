@@ -1,4 +1,4 @@
-package com.maxden.safe.domain;
+package com.maxden.safe.domain.exception;
 
 public class UserJobByUserNotFoundException extends RuntimeException {
 

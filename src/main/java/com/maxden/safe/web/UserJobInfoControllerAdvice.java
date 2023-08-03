@@ -1,8 +1,8 @@
 package com.maxden.safe.web;
 
-import com.maxden.safe.domain.UserJobByCompanyNotFoundException;
-import com.maxden.safe.domain.UserJobNoBodyException;
-import com.maxden.safe.domain.UserJobByUserNotFoundException;
+import com.maxden.safe.domain.exception.UserJobByCompanyNotFoundException;
+import com.maxden.safe.domain.exception.UserJobNoBodyException;
+import com.maxden.safe.domain.exception.UserJobByUserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
