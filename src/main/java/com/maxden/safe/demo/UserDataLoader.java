@@ -1,9 +1,6 @@
 package com.maxden.safe.demo;
 
-import com.maxden.safe.domain.Company;
-import com.maxden.safe.domain.CompanyRepository;
-import com.maxden.safe.domain.UserRepository;
-import com.maxden.safe.domain.Users;
+import com.maxden.safe.domain.*;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -19,16 +16,30 @@ public class UserDataLoader {
 
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
+    private final UserJobRepository userJobRepository;
 
-    public UserDataLoader(UserRepository userRepository, CompanyRepository companyRepository) {
+    public UserDataLoader(
+            UserRepository userRepository,
+            CompanyRepository companyRepository,
+            UserJobRepository userJobRepository
+    ) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
+        this.userJobRepository = userJobRepository;
     }
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadUserJobTestData() {
         createTempUsers();
         createTempCompanies();
+        createTempUserJob();
+    }
+
+    private void createTempUserJob() {
+        userJobRepository.deleteAll();
+        var userJob1 = UserJobInfo.of(1, 1, "описание", true);
+        var userJob2 = UserJobInfo.of(1, 1, "описание", true);
+        userJobRepository.saveAll(List.of(userJob1, userJob2));
     }
 
     private void createTempCompanies() {
