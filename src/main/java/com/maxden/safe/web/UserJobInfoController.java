@@ -16,6 +16,13 @@ public class UserJobInfoController {
     }
 
 
+    @PostMapping(value = "/add")
+    public UserJobInfo addRequest(
+            @RequestBody UserJobInfo userJobInfo
+    ) {
+        return userJobInfoService.save(userJobInfo);
+    }
+
     @PatchMapping(value = "/save")
     public UserJobInfo saveRequest(
             @RequestBody UserJobInfo userJobInfo
