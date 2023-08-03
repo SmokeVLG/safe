@@ -12,10 +12,10 @@ public record UserJobInfo(
         @Id
         Long id,
 
-        @NotBlank(message = "The company id must be defined.")
+
         Long id_company,
 
-        @NotBlank(message = "The user id must be defined.")
+
         Long user_id,
 
         @NotBlank(message = "The book description name must be defined.")

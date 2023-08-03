@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.List;
 
 @Component
 @Profile("testdata")
@@ -16,12 +15,12 @@ public class UserDataLoader {
 
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
-    private final UserJobRepository userJobRepository;
+    private final UserJobInfoRepository userJobRepository;
 
     public UserDataLoader(
             UserRepository userRepository,
             CompanyRepository companyRepository,
-            UserJobRepository userJobRepository
+            UserJobInfoRepository userJobRepository
     ) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
