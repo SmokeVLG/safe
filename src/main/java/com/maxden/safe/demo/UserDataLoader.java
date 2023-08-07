@@ -1,6 +1,13 @@
 package com.maxden.safe.demo;
 
-import com.maxden.safe.domain.*;
+import com.maxden.safe.domain.CompanyRepository;
+import com.maxden.safe.domain.UserJobInfoRepository;
+import com.maxden.safe.domain.UserRepository;
+import com.maxden.safe.domain.model.Company;
+import com.maxden.safe.domain.model.UserJobInfo;
+import com.maxden.safe.domain.model.Users;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -11,27 +18,18 @@ import java.time.LocalDate;
 
 @Component
 @Profile("testdata")
+@RequiredArgsConstructor
+@Slf4j
 public class UserDataLoader {
 
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
     private final UserJobInfoRepository userJobRepository;
 
-    public UserDataLoader(
-            UserRepository userRepository,
-            CompanyRepository companyRepository,
-            UserJobInfoRepository userJobRepository
-    ) {
-        this.userRepository = userRepository;
-        this.companyRepository = companyRepository;
-        this.userJobRepository = userJobRepository;
-    }
-
     @EventListener(ApplicationReadyEvent.class)
     public void loadUserJobTestData() {
         createTempData();
     }
-
 
     private void createTempData() {
         userJobRepository.deleteAll();
@@ -82,11 +80,15 @@ public class UserDataLoader {
                 "Первый пользователь с первой работой",
                 true
         ));
+        log.info("Test user1 is created with id:{}", userJob1.user_id());
+
         var userJob2 = userJobRepository.save(UserJobInfo.of(
                 testCompany2.id(),
                 testUser2.id(),
                 "Второй пользователь со второй работой",
                 true
         ));
+
+        log.info("Test user2 is created with id:{}", userJob2.user_id());
     }
 }

@@ -2,6 +2,9 @@ package com.maxden.safe.domain;
 
 import com.maxden.safe.domain.exception.UserJobByCompanyNotFoundException;
 import com.maxden.safe.domain.exception.UserJobByUserNotFoundException;
+import com.maxden.safe.domain.model.Company;
+import com.maxden.safe.domain.model.UserJobInfo;
+import com.maxden.safe.domain.model.Users;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

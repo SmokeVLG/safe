@@ -1,20 +1,18 @@
 package com.maxden.safe.web;
 
-import com.maxden.safe.domain.UserJobInfo;
 import com.maxden.safe.domain.UserJobInfoService;
 import com.maxden.safe.domain.exception.UserJobNoBodyException;
+import com.maxden.safe.domain.model.UserJobInfo;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("jobs")
 public class UserJobInfoController {
-
     private final UserJobInfoService userJobInfoService;
 
     public UserJobInfoController(UserJobInfoService userJobInfoService) {
         this.userJobInfoService = userJobInfoService;
     }
-
 
     @PostMapping(value = "/add")
     public UserJobInfo addRequest(
@@ -44,8 +42,6 @@ public class UserJobInfoController {
         if (userJobInfo.id_company() != null) {
             return userJobInfoService.findCompanyId(userJobInfo.user_id());
         }
-
         return null;
     }
-
 }
