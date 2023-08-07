@@ -5,6 +5,7 @@ import com.maxden.safe.domain.exception.UserJobByUserNotFoundException;
 import com.maxden.safe.domain.model.Company;
 import com.maxden.safe.domain.model.UserJobInfo;
 import com.maxden.safe.domain.model.Users;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +13,12 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserJobInfoService {
 
     private final UserJobInfoRepository userJobInfoRepository;
     private final UserRepository userRepository;
     private final CompanyRepository companyRepository;
-
-    public UserJobInfoService(
-            UserJobInfoRepository userJobInfoRepository,
-            UserRepository userRepository,
-            CompanyRepository companyRepository
-    ) {
-        this.userJobInfoRepository = userJobInfoRepository;
-        this.userRepository = userRepository;
-        this.companyRepository = companyRepository;
-    }
 
     public UserJobInfo findByUserId(Long userId) {
         return userJobInfoRepository.findByUserId(userId)
@@ -40,8 +32,8 @@ public class UserJobInfoService {
 
     public UserJobInfo save(UserJobInfo userJobInfo) {
 
-        Long userId = userJobInfo.user_id();
-        Long companyId = userJobInfo.id_company();
+        Long userId = userJobInfo.getUserId();
+        Long companyId = userJobInfo.getIdCompany();
 
         Optional<Users> users = userRepository.findById(userId);
         log.info("Find user with id:{}", users.orElseThrow(() -> new UserJobByUserNotFoundException(userId)));

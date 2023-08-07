@@ -35,12 +35,12 @@ public class UserJobInfoController {
         if (userJobInfo == null) {
             throw new UserJobNoBodyException();
         }
-        if (userJobInfo.user_id() != null) {
-            return userJobInfoService.findByUserId(userJobInfo.user_id());
+        if (userJobInfo.getUserId() != null) {
+            return userJobInfoService.findByUserId(userJobInfo.getUserId());
         }
 
-        if (userJobInfo.id_company() != null) {
-            return userJobInfoService.findCompanyId(userJobInfo.user_id());
+        if (userJobInfo.getIdCompany() != null) {
+            return userJobInfoService.findCompanyId(userJobInfo.getUserId());
         }
         return null;
     }

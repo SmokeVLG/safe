@@ -36,7 +36,7 @@ public class UserDataLoader {
         userRepository.deleteAll();
         companyRepository.deleteAll();
 
-        Users testUser1 = userRepository.save(Users.of(
+        Users testUser1 = new Users(
                 "Денисов",
                 "Владимирович",
                 "Максим",
@@ -44,51 +44,56 @@ public class UserDataLoader {
                 "М",
                 33,
                 "программист",
-                false
-        ));
+                false);
 
-        Users testUser2 = userRepository.save(Users.of(
-                "Иванов",
-                "Иванович",
-                "Иван",
-                Date.valueOf(LocalDate.parse("1993-08-20")),
+
+        testUser1 = userRepository.save(testUser1);
+
+
+        Users testUser2 = new Users("Денисов",
+                "Владимирович",
+                "Максим",
+                Date.valueOf(LocalDate.parse("1989-09-23")),
                 "М",
-                30,
+                33,
                 "программист",
-                false
-        ));
+                false);
+
+
+        testUser2 = userRepository.save(testUser2);
+
 
         Company testCompany1 =
                 companyRepository.save(
-                        Company.of(
+                        new Company(
                                 "Рога",
                                 "Продажа мяса",
                                 true
                         ));
         Company testCompany2 =
                 companyRepository.save(
-                        Company.of(
+                        new Company(
                                 "Копыта",
                                 "Продажа молока",
                                 true
                         ));
 
 
-        var userJob1 = userJobRepository.save(UserJobInfo.of(
-                testCompany1.id(),
-                testUser1.id(),
+        var userJob1 = userJobRepository.save(new UserJobInfo(
+                testCompany1.getId(),
+                testUser1.getId(),
                 "Первый пользователь с первой работой",
                 true
         ));
-        log.info("Test user1 is created with id:{}", userJob1.user_id());
+        log.info("Test user1 is created with id:{}", userJob1.getUserId());
 
-        var userJob2 = userJobRepository.save(UserJobInfo.of(
-                testCompany2.id(),
-                testUser2.id(),
+        var userJob2 = userJobRepository.save(new UserJobInfo(
+                testCompany2.getId(),
+                testUser2.getId(),
                 "Второй пользователь со второй работой",
                 true
         ));
 
-        log.info("Test user2 is created with id:{}", userJob2.user_id());
+        log.info("Test user2 is created with id:{}", userJob2.getUserId());
     }
 }
