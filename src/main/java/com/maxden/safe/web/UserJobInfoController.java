@@ -5,6 +5,8 @@ import com.maxden.safe.domain.exception.UserJobNoBodyException;
 import com.maxden.safe.domain.model.UserJobInfo;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("jobs")
 public class UserJobInfoController {
@@ -29,18 +31,18 @@ public class UserJobInfoController {
     }
 
     @GetMapping
-    public UserJobInfo get(
+    public List<UserJobInfo> get(
             @RequestBody(required = false) UserJobInfo userJobInfo
     ) {
         if (userJobInfo == null) {
             throw new UserJobNoBodyException();
         }
-        if (userJobInfo.getUserId() != null) {
-            return userJobInfoService.findByUserId(userJobInfo.getUserId());
+        if (userJobInfo.getUser().getId() != null) {
+            return userJobInfoService.findByUserId(userJobInfo.getUser().getId());
         }
 
-        if (userJobInfo.getIdCompany() != null) {
-            return userJobInfoService.findCompanyId(userJobInfo.getUserId());
+        if (userJobInfo.getCompany().getId() != null) {
+            return userJobInfoService.findCompanyId(userJobInfo.getUser().getId());
         }
         return null;
     }

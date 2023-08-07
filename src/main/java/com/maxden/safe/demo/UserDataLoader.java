@@ -4,7 +4,6 @@ import com.maxden.safe.domain.CompanyRepository;
 import com.maxden.safe.domain.UserJobInfoRepository;
 import com.maxden.safe.domain.UserRepository;
 import com.maxden.safe.domain.model.Company;
-import com.maxden.safe.domain.model.UserJobInfo;
 import com.maxden.safe.domain.model.Users;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +31,7 @@ public class UserDataLoader {
     }
 
     private void createTempData() {
-        userJobRepository.deleteAll();
+        userJobRepository.truncateAll();
         userRepository.deleteAll();
         companyRepository.deleteAll();
 
@@ -79,21 +78,25 @@ public class UserDataLoader {
                         ));
 
 
-        var userJob1 = userJobRepository.save(new UserJobInfo(
+        var userJob1 = userJobRepository.saveAll(
                 testCompany1.getId(),
                 testUser1.getId(),
                 "Первый пользователь с первой работой",
-                true
-        ));
-        log.info("Test user1 is created with id:{}", userJob1.getUserId());
+                true,
+                new java.util.Date(),
+                new java.util.Date()
+        );
+        log.info("Test user1 is created with id:{}", userJob1);
 
-        var userJob2 = userJobRepository.save(new UserJobInfo(
+        var userJob2 = userJobRepository.saveAll(
                 testCompany2.getId(),
                 testUser2.getId(),
                 "Второй пользователь со второй работой",
-                true
-        ));
+                true,
+                new java.util.Date(),
+                new java.util.Date()
+        );
 
-        log.info("Test user2 is created with id:{}", userJob2.getUserId());
+        log.info("Test user2 is created with id:{}", userJob2);
     }
 }

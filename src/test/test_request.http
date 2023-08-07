@@ -1,0 +1,102 @@
+
+###
+GET http://localhost:8282/jobs
+accept: application/json
+Content-Type: application/json
+
+{
+  "company": {
+    "id": 29,
+    "companyName": "новая компания2",
+    "description": "описание новой компании2",
+    "isActivity": "true"
+  },
+  "user": {
+    "id": 29,
+    "familyName": "Денисов2",
+    "middleName": "Владимирович",
+    "firstName": "Максим",
+    "birthday": "1989-09-23",
+    "gender": "M",
+    "age": "30",
+    "description": "Описание",
+    "isBlocked": "false"
+  },
+  "id": 30,
+  "description": "Новое описание2",
+  "isActivity": "true",
+  "secondName": "Денисов",
+  "birthDate": "23.09.1989",
+  "gender": "М",
+  "type": "RESET_PASSWORD",
+  "accountLogin": "maxden"
+}
+
+
+
+###
+POST http://localhost:8282/jobs/add
+accept: application/json
+Content-Type: application/json
+
+{
+  "company": {
+    "companyName": "новая компания",
+    "description": "описание новой компании",
+    "isActivity": "true"
+  },
+  "user": {
+    "familyName": "Денисов",
+    "middleName": "Владимирович",
+    "firstName": "Максим",
+    "birthday": "1989-09-23",
+    "gender": "M",
+    "age": "30",
+    "description": "Описание",
+    "isBlocked": "false"
+  },
+  "description": "Новое описание",
+  "isActivity": "true",
+  "secondName": "Денисов",
+  "birthDate": "23.09.1989",
+  "gender": "М",
+  "type": "RESET_PASSWORD",
+  "accountLogin": "maxden"
+}
+
+
+<> 2023-08-07T163026.200.json
+
+
+###
+PATCH http://localhost:8282/jobs/save
+accept: application/json
+Content-Type: application/json
+
+{
+  "company": {
+    "id": 26,
+    "companyName": "новая компания2",
+    "description": "описание новой компании2",
+    "isActivity": "true"
+  },
+  "user": {
+    "id": 26,
+    "familyName": "Денисов2",
+    "middleName": "Владимирович",
+    "firstName": "Максим",
+    "birthday": "1989-09-23",
+    "gender": "M",
+    "age": "30",
+    "description": "Описание",
+    "isBlocked": "false"
+  },
+  "id": 30,
+  "description": "Новое описание2",
+  "isActivity": "true",
+  "secondName": "Денисов",
+  "birthDate": "23.09.1989",
+  "gender": "М",
+  "type": "RESET_PASSWORD",
+  "accountLogin": "maxden"
+}

@@ -1,6 +1,7 @@
 package com.maxden.safe.domain.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,9 +10,11 @@ import org.springframework.data.relational.core.mapping.Table;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "user_job_info")
 public class UserJobInfo {
     @Id
@@ -26,29 +29,34 @@ public class UserJobInfo {
             allocationSize = 1
     )
     Long id;
-    @Column(name = "id_company")
-    Long idCompany;
-    @Column(name = "user_id")
-    Long userId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "company")
+    @JoinColumn(name = "id_company")
+    Company company;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "users")
+    @JoinColumn(name = "user_id")
+    Users user;
     @NotBlank(message = "The book description name must be defined.")
     String description;
     @Column(name = "is_activity")
     boolean isActivity;
     @CreatedDate
-    Instant created;
+    Date created;
     @LastModifiedDate
-    Instant updated;
+    Date updated;
 
     public UserJobInfo() {
     }
 
-    public UserJobInfo(long idCompany,
-                       long userId,
+    public UserJobInfo(Company company,
+                       Users user,
                        String description,
                        boolean isActivity) {
-        this.id = null;
-        this.idCompany = idCompany;
-        this.userId = userId;
+        this.company = company;
+        this.user = user;
         this.description = description;
         this.isActivity = isActivity;
 
